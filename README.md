@@ -39,13 +39,13 @@ Input (URL / email / message)
 
 
 ## Features
-
+```
  **URL analysis** — HTTPS check, suspicious TLDs, typosquatting/brand impersonation, IP-based URLs
  **Email/message analysis** — urgency & manipulation language, credential-harvesting requests, suspicious attachment phrasing
  **AI explanation** — plain-language reasoning and 3 concrete safety recommendations per scan
  **Scan history** — every scan is saved and viewable on a dedicated history page
  **Graceful degradation** — if the AI explanation call fails or times out, the heuristic score/label still return successfully
-
+``
 ## Tech stack
 
  Layer | Technology 
@@ -79,22 +79,22 @@ phishguard/
 ## Running locally
 
 **Backend**
-
+```
 cd backend
 python -m venv venv
 venv\Scripts\activate        # Windows
 pip install -r requirements.txt
 # create a .env with DATABASE_URL and OPENAI_API_KEY
 uvicorn main:app --reload
-
+``
 
 **Frontend**
-
+```
 cd frontend
 npm install
 # create a .env.local with NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
 npm run dev
-
+``
 ## License
 
 MIT
