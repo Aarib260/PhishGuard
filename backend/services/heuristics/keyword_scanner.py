@@ -2,28 +2,48 @@ import re
 
 URGENCY_PHRASES = [
     "act now",
-    "act immeadiately",
+    "act immediately",
     "urgent action required",
     "immediate action required",
-    "confirm your identity",
-    "click here immediately",
-    "you have won",
-    "claim your prize",
+    "your account will be suspended",
+    "account suspended",
+    "account locked",
+    "verify immediately",
+    "respond within 24 hours",
+    "within 24 hours",
+    "within 48 hours",
+    "security alert",
+    "unusual activity detected",
+    "unauthorized login attempt",
+    "payment declined",
     "your payment failed",
     "update your billing",
     "update your payment",
+    "claim your prize",
+    "you have won",
+    "final warning",
+    "last chance",
 ]
 
 CREDENTIAL_REQUEST_PHRASES = [
     "enter your password",
     "provide your password",
     "confirm your password",
-    "enter your ssn",
-    "social security number",
+    "verify your password",
+    "verify your account",
+    "verify your identity",
+    "confirm your identity",
+    "log in to continue",
+    "sign in to continue",
+    "confirm your credentials",
+    "update your account information",
+    "reset your password",
     "enter your card number",
     "enter your pin",
+    "enter your ssn",
+    "social security number",
     "banking details",
-    "verify your password",
+    "credit card information",
 ]
 
 ATTACHMENT_FLAGS = [
@@ -32,6 +52,11 @@ ATTACHMENT_FLAGS = [
     "download the attached file",
     "attached document",
     "view attachment",
+    "attached pdf",
+    "attached zip file",
+    "attached file",
+    "review the attachment",
+    "invoice attached",
 ]
 
 def scan_keywords(text: str) -> dict:
