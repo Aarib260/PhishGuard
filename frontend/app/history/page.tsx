@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Faster_One } from "next/font/google";
 
 export default function History() {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/history`)
+    fetch("http://127.0.0.1:8000/api/history")
       .then((res) => res.json())
       .then((d) => {
         setData(d);
@@ -83,3 +84,4 @@ export default function History() {
     </main>
   );
 }
+

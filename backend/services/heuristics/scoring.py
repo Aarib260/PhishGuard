@@ -1,52 +1,43 @@
-# scoring.py
-
 def calculate_keyword_score(keyword_result):
+
     score = 0
 
-    urgency_flags = keyword_result.get("urgency_flags", [])
-    credential_flags = keyword_result.get("credential_request_flags", [])
-    attachment_flags = keyword_result.get("attachment_flags", [])
+    score += min(len(keyword_result.get("urgency_flags", [])) * 12, 36)
+    score += min(len(keyword_result.get("credential_request_flags", [])) * 20, 40)
+    score += min(len(keyword_result.get("attachment_flags", [])) * 10, 20)
 
-    # Urgency language
-    score += min(len(urgency_flags) * 8, 24)
-
-    # Requests for passwords, credentials, banking info, etc.
-    score += min(len(credential_flags) * 15, 30)
-
-    # Suspicious attachment language
-    score += min(len(attachment_flags) * 8, 16)
-
-    return min(score, 50)
+    return min(score, 100)
 
 
 def calculate_score(result, keyword_result=None):
+
     score = 0
 
     # No HTTPS
-    if not result.get("https", True):
-        score += 15
+    if not result["https"]:
+        score += 20
 
-    # Suspicious TLD (.tk, .xyz, etc.)
-    if result.get("suspicious_tld"):
-        score += 25
+    # Suspicious domain endings
+    if result["suspicious_tld"]:
+        score += 45
 
-    # Brand impersonation (PayPal, Microsoft, etc.)
+    # Fake brand
     if result.get("brand_impersonation"):
-        score += 35
+        score += 40
 
-    # Typosquatting (paypa1, goog1e, micr0soft)
+    # Long URL
+    if result["long_url"]:
+        score += 10
+
+    # Typosquatting
     if result.get("uses_typosquatting"):
         score += 35
 
-    # Direct IP address instead of domain
+    # IP address used instead of domain
     if result.get("ip_address"):
         score += 25
 
-    # Extremely long URLs
-    if result.get("long_url"):
-        score += 5
-
-    # Email content analysis
+    # Keyword/manipulation language
     if keyword_result:
         score += calculate_keyword_score(keyword_result)
 
@@ -54,32 +45,12 @@ def calculate_score(result, keyword_result=None):
 
 
 def get_label(score):
-    if score < 25:
+
+    if score < 30:
         return "Safe"
-    elif score < 60:
+
+    elif score < 70:
         return "Suspicious"
+
     else:
         return "Dangerous"
-
-
-def get_risk_level(score):
-    if score < 25:
-        return {
-            "label": "Safe",
-            "color": "green",
-            "description": "No significant phishing indicators detected."
-        }
-
-    elif score < 60:
-        return {
-            "label": "Suspicious",
-            "color": "yellow",
-            "description": "Some phishing indicators were detected. Proceed with caution."
-        }
-
-    else:
-        return {
-            "label": "Dangerous",
-            "color": "red",
-            "description": "Multiple phishing indicators detected. Avoid interacting with this content."
-        }

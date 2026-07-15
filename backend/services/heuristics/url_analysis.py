@@ -4,10 +4,13 @@ import tldextract
 
 
 SUSPICIOUS_TLDS = {
-    "tk", "ml", "ga", "cf", "gq",
-    "xyz", "top", "click", "work",
-    "support", "buzz", "monster",
-    "rest", "fit", "cam", "loan"
+    "tk",
+    "ml",
+    "ga",
+    "cf",
+    "gq",
+    "xyz",
+    "top"
 }
 
 
@@ -15,15 +18,9 @@ BRANDS = {
     "paypal": ["paypa1", "paypaI"],
     "google": ["goog1e", "g00gle"],
     "amazon": ["amaz0n", "arnazon"],
-    "microsoft": ["micros0ft", "micr0soft"],
+    "microsoft": ["micros0ft"],
     "apple": ["app1e"],
-    "netflix": ["netf1ix"],
-    "facebook": ["faceb00k"],
-    "instagram": ["instagrarn"],
-    "linkedin": ["linkedln"],
-    "github": ["githubb"],
-    "dropbox": ["dr0pbox"],
-    "steam": ["stearn"],
+    "netflix": ["netf1ix"]
 }
 
 def analyze_url(url):
